@@ -100,7 +100,7 @@ const Hero = () => {
         </a>
 
         <h1 className="text-center text-5xl leading-17 md:text-6xl md:leading-20 font-semibold max-w-4xl text-slate-900">
-          A list of registered advocates in Uganda.
+          A list of advocates in Uganda.
         </h1>
       </main>
     </section>
