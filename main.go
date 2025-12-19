@@ -30,7 +30,6 @@ func main() {
 
 	outputFile := "advocates.json"
 
-	// Make HTTP GET request
 	resp, err := http.Get(url)
 	if err != nil {
 		log.Fatalf("Failed to fetch URL: %v", err)
@@ -41,7 +40,6 @@ func main() {
 		log.Fatalf("Status code error: %d %s", resp.StatusCode, resp.Status)
 	}
 
-	// Parse HTML
 	doc, err := goquery.NewDocumentFromReader(resp.Body)
 	if err != nil {
 		log.Fatalf("Failed to parse HTML: %v", err)
@@ -49,9 +47,7 @@ func main() {
 
 	var advocates []Advocate
 
-	// Find all table rows (skip header)
 	doc.Find("table tr").Each(func(i int, row *goquery.Selection) {
-		// Skip header row
 		if row.Find("th").Length() > 0 {
 			return
 		}
@@ -75,13 +71,11 @@ func main() {
 		}
 	})
 
-	// Convert to JSON
 	jsonData, err := json.MarshalIndent(advocates, "", "  ")
 	if err != nil {
 		log.Fatalf("Failed to marshal JSON: %v", err)
 	}
 
-	// Write to file
 	err = os.WriteFile(outputFile, jsonData, 0o644)
 	if err != nil {
 		log.Fatalf("Failed to write file: %v", err)
