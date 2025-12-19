@@ -41,7 +41,7 @@ export default function MemberTableApp() {
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const currentItems = useMemo(
     () => filtered.slice(startIndex, endIndex),
-    [filtered, startIndex, endIndex]
+    [filtered, startIndex, endIndex],
   );
 
   const handleSearchChange = useCallback((value: string) => {
@@ -124,31 +124,27 @@ export default function MemberTableApp() {
               value={status}
               onChange={(e) => handleStatusChange(e.target.value)}
               className="w-full md:w-48 rounded-lg border border-gray-300   bg-white  px-4 py-2.5 text-sm text-gray-900 
-             focus:outline-none focus:ring-2 focus:ring-blue-500   transition-shadow"
-            >
+             focus:outline-none focus:ring-2 focus:ring-blue-500   transition-shadow">
               <option value="all">All statuses</option>
               <option value="Active">Active</option>
               <option value="Inactive">Inactive</option>
             </select>
           </div>
 
-          {/* Results count and pagination info */}
-          {filtered.length > 0 && (
+           {filtered.length > 0 && (
             <div className="mb-4 text-sm text-gray-600 ">
               Showing {startIndex + 1}-{Math.min(endIndex, filtered.length)} of{" "}
               {filtered.length.toLocaleString()}
             </div>
           )}
 
-          {/* Loading overlay during filter transitions */}
-          {isPending && (
+           {isPending && (
             <div className="absolute inset-0 bg-white/50  flex items-center justify-center rounded-lg z-10">
               <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
             </div>
           )}
 
-          {/* Table */}
-          <div className="overflow-x-auto rounded-lg border border-gray-200  ">
+           <div className="overflow-x-auto rounded-lg border border-gray-200  ">
             <table className="min-w-full">
               <thead className="bg-gray-100  sticky top-0">
                 <tr className="text-left text-sm text-gray-600 ">
@@ -166,8 +162,7 @@ export default function MemberTableApp() {
                 {currentItems.map((row) => (
                   <tr
                     key={row.id}
-                    className="text-sm text-gray-800  hover:bg-gray-50 transition-colors"
-                  >
+                    className="text-sm text-gray-800  hover:bg-gray-50 transition-colors">
                     <Td>
                       <div className="font-medium">{row.name}</div>
                     </Td>
@@ -176,8 +171,7 @@ export default function MemberTableApp() {
                       {row.email ? (
                         <a
                           href={`mailto:${row.email}`}
-                          className="text-blue-600 hover:underline"
-                        >
+                          className="text-blue-600 hover:underline">
                           {row.email}
                         </a>
                       ) : (
@@ -188,8 +182,7 @@ export default function MemberTableApp() {
                       {row.phone ? (
                         <a
                           href={`tel:${row.phone}`}
-                          className="text-blue-600 hover:underline"
-                        >
+                          className="text-blue-600 hover:underline">
                           {row.phone}
                         </a>
                       ) : (
@@ -209,8 +202,7 @@ export default function MemberTableApp() {
                           row.status === "Active"
                             ? "bg-green-100 text-green-700 "
                             : "bg-red-100 text-red-700  "
-                        }`}
-                      >
+                        }`}>
                         {row.status}
                       </span>
                     </Td>
@@ -227,8 +219,7 @@ export default function MemberTableApp() {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
