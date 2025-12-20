@@ -101,15 +101,15 @@ export default function MemberTableApp() {
       <div className="min-h-screen bg-gray-50 p-4">
         <div className="max-w-7xl mx-auto bg-white  rounded p-4">
           <div className="flex items-center justify-between mb-6">
-            <h1 className="text-xl font-semibold text-gray-900 ">Members</h1>
+            <h1 className="text-xl font-semibold text-gray-900 ">Advocates</h1>
             <div className="text-sm text-gray-600 ">
               {filtered.length.toLocaleString()}{" "}
-              {filtered.length === 1 ? "member" : "members"}
+              {filtered.length === 1 ? "advocate" : "advocates"}
             </div>
           </div>
 
           {/* Filters */}
-          <div className="flex flex-col md:flex-row gap-4 mb-6">
+          <div className="flex max-w-xl mx-auto flex-col md:flex-row gap-4 mb-6">
             <div className="flex-1">
               <input
                 type="text"
@@ -131,20 +131,20 @@ export default function MemberTableApp() {
             </select>
           </div>
 
-           {filtered.length > 0 && (
+          {filtered.length > 0 && (
             <div className="mb-4 text-sm text-gray-600 ">
               Showing {startIndex + 1}-{Math.min(endIndex, filtered.length)} of{" "}
               {filtered.length.toLocaleString()}
             </div>
           )}
 
-           {isPending && (
+          {isPending && (
             <div className="absolute inset-0 bg-white/50  flex items-center justify-center rounded-lg z-10">
               <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
             </div>
           )}
 
-           <div className="overflow-x-auto rounded-lg border border-gray-200  ">
+          <div className="overflow-x-auto rounded-lg border border-gray-200  ">
             <table className="min-w-full">
               <thead className="bg-gray-100  sticky top-0">
                 <tr className="text-left text-sm text-gray-600 ">
@@ -164,7 +164,13 @@ export default function MemberTableApp() {
                     key={row.id}
                     className="text-sm text-gray-800  hover:bg-gray-50 transition-colors">
                     <Td>
-                      <div className="font-medium">{row.name}</div>
+                      <div className="font-medium">
+                        {row.name ? (
+                          <p>{row.name}</p>
+                        ) : (
+                          <span className="text-gray-400">—</span>
+                        )}
+                      </div>
                     </Td>
                     <Td>{row.firm_name}</Td>
                     <Td>
@@ -191,11 +197,7 @@ export default function MemberTableApp() {
                     </Td>
                     <Td>{row.enrollment_date}</Td>
                     <Td>{row.renewal_date}</Td>
-                    <Td>
-                      <span className="font-mono text-xs">
-                        {row.certificate_no}
-                      </span>
-                    </Td>
+                    <Td>{row.certificate_no}</Td>
                     <Td>
                       <span
                         className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${
